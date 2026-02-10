@@ -1,1 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Material Cost Predictor</title>
+
+    <!-- Google Fonts & Animation Library -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #e3f2fd, #ffffff);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            color: #2c3e50;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            text-align: center;
+            color: #1565c0;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        p.description {
+            text-align: center;
+            color: #555;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        input[type="date"] {
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #2196f3;
+            border-radius: 8px;
+            margin-right: 10px;
+            transition: 0.3s;
+        }
+
+        input[type="date"]:focus {
+            outline: none;
+            border-color: #1565c0;
+            box-shadow: 0 0 8px rgba(33,150,243,0.3);
+        }
+
+        input[type="submit"] {
+            padding: 12px 25px;
+            font-size: 16px;
+            background-color: #1565c0;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0d47a1;
+            transform: scale(1.05);
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+            animation: fadeIn 1s ease;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #1565c0;
+            color: white;
+            font-weight: 600;
+        }
+
+        td {
+            background-color: #f1f8ff;
+        }
+
+        #plot {
+            margin-top: 40px;
+            animation: fadeIn 1.5s ease;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .highlight {
+            color: #0d47a1;
+            font-weight: 600;
+        }
+
+        .typed-text {
+            color: #1976d2;
+            font-weight: 600;
+        }
+
+        .info-section {
+            text-align: center;
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            animation: fadeIn 1.5s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Construction Material Cost Predictor 🏗️</h1>
+
+        <div class="info-section">
+            <span id="typed"></span>
+        </div>
+
+        <p class="description">
+            This system predicts future prices of <span class="highlight">Cement, Steel, Bricks, and Sand</span> 
+            using <strong>Artificial Intelligence & Machine Learning</strong>. 
+            It helps civil engineers and construction managers estimate project budgets accurately.
+        </p>
+
+        <form method="POST">
+            <label for="date">Select Future Date:</label><br><br>
+            <input type="date" id="date" name="date" required>
+            <input type="submit" value="🔍 Predict">
+        </form>
+
+        {% if prediction %}
+        <h2>Predicted Material Prices for {{ request.form['date'] }}</h2>
+        <table>
+            <tr><th>Material</th><th>Predicted Price</th></tr>
+            {% for material, price in prediction.items() %}
+            <tr>
+                <td>{{ material }}</td>
+                <td>₹{{ price }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+
+        {% if plot_html %}
+        <div id="plot">
+            {{ plot_html|safe }}
+        </div>
+        {% endif %}
+
+        <footer>
+            Developed as part of <span class="highlight">Civil Engineering AI Project</span> |
+            Smart Material Cost Prediction System © 2025
+        </footer>
+    </div>
+
+    <script>
+        // Typed.js animation
+        var typed = new Typed("#typed", {
+            strings: [
+                "📈 Predict Future Construction Costs in Seconds!",
+                "🧱 AI-powered Cost Forecasting for Cement, Steel, Bricks, and Sand",
+                "🏗️ Empowering Civil Engineers with Smart Insights"
+            ],
+            typeSpeed: 40,
+            backSpeed: 25,
+            backDelay: 2000,
+            loop: true
+        });
+    </script>
+</body>
+</html>
 
